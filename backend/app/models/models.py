@@ -11,19 +11,6 @@ class UserRole(str, enum.Enum):
     ADMIN = "admin"
     USER = "user"
 
-class ScanStatus(str, enum.Enum):
-    PENDING = "Pending"
-    RUNNING = "Running"
-    COMPLETED = "Completed"
-    FAILED = "Failed"
-
-class SeverityLevel(str, enum.Enum):
-    CRITICAL = "Critical"
-    HIGH = "High"
-    MEDIUM = "Medium"
-    LOW = "Low"
-    INFO = "Info"
-
 class Workspace(Base):
     __tablename__ = "workspaces"
     id = Column(String, primary_key=True, default=lambda: f"w_{uuid.uuid4().hex[:9]}")
@@ -50,19 +37,4 @@ class User(Base):
 
 
 
-class Vulnerability(Base):
-    __tablename__ = "vulnerabilities"
-    id = Column(String, primary_key=True, default=lambda: f"v_{uuid.uuid4().hex[:9]}")
-    project_id = Column(String, ForeignKey("projects.id"), nullable=False)
-    scan_id = Column(String, ForeignKey("scan_jobs.id"), nullable=True)
-    title = Column(String, nullable=False)
-    description = Column(Text, nullable=False)
-    severity = Column(Enum(SeverityLevel), nullable=False)
-    cvss = Column(Float, nullable=True)
-    status = Column(String, default="Open")
-    endpoint = Column(String, nullable=True)
-    evidence = Column(Text, nullable=True)
-    remediation = Column(Text, nullable=True)
-    discovered_at = Column(DateTime, default=datetime.utcnow)
 
-    project = relationship("Project", back_populates="vulnerabilities")

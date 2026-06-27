@@ -3,7 +3,7 @@ from sqlalchemy.orm import Session
 from datetime import datetime
 
 from app.scans.models import ScanJob, ScanStatus
-from app.models.models import Vulnerability
+from app.vulnerabilities.models import Vulnerability
 from app.scanners.headers.scanner import HeaderScanner
 from app.scanners.ssl.scanner import SSLScanner
 from app.scanners.ports.scanner import PortScanner

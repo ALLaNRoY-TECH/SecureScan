@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 from typing import List, Dict, Any
 from pydantic import BaseModel
-from app.models.models import SeverityLevel
+from app.vulnerabilities.models import SeverityLevel
 
 class ScannerResult(BaseModel):
     scanner: str

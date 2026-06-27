@@ -1,7 +1,7 @@
 import time
 from typing import List
 from app.scanners.base import BaseScanner, ScannerResult
-from app.models.models import SeverityLevel
+from app.vulnerabilities.models import SeverityLevel
 
 class SSLScanner(BaseScanner):
     def run(self) -> List[ScannerResult]:
