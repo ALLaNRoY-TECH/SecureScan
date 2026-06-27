@@ -2,7 +2,8 @@ from typing import List
 from sqlalchemy.orm import Session
 from datetime import datetime
 
-from app.models.models import ScanJob, ScanStatus, Vulnerability
+from app.scans.models import ScanJob, ScanStatus
+from app.models.models import Vulnerability
 from app.scanners.headers.scanner import HeaderScanner
 from app.scanners.ssl.scanner import SSLScanner
 from app.scanners.ports.scanner import PortScanner
@@ -18,7 +19,6 @@ def run_orchestrator(scan_id: str, db: Session):
 
     target_url = scan.target_url
 
-    # Initialize plugins
     plugins = [
         HeaderScanner(target_url),
         SSLScanner(target_url),
@@ -27,12 +27,10 @@ def run_orchestrator(scan_id: str, db: Session):
 
     all_results = []
     try:
-        # Run plugins synchronously for now (could be asyncio.gather in the future)
         for plugin in plugins:
             results = plugin.run()
             all_results.extend(results)
         
-        # Save vulnerabilities
         for res in all_results:
             vuln = Vulnerability(
                 project_id=scan.project_id,

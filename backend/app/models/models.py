@@ -48,17 +48,7 @@ class User(Base):
 
 
 
-class ScanJob(Base):
-    __tablename__ = "scan_jobs"
-    id = Column(String, primary_key=True, default=lambda: f"s_{uuid.uuid4().hex[:9]}")
-    project_id = Column(String, ForeignKey("projects.id"), nullable=False)
-    target_url = Column(String, nullable=False)
-    status = Column(Enum(ScanStatus), default=ScanStatus.PENDING)
-    scan_type = Column(String, default="Quick Scan")
-    started_at = Column(DateTime, nullable=True)
-    completed_at = Column(DateTime, nullable=True)
-    
-    project = relationship("Project", back_populates="scans")
+
 
 class Vulnerability(Base):
     __tablename__ = "vulnerabilities"
