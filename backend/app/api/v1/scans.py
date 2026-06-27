@@ -5,7 +5,8 @@ from datetime import datetime
 
 from app.shared.database import get_db
 from app.api.deps import get_current_user
-from app.models.models import User, Project, ScanJob, ScanStatus
+from app.models.models import User, ScanJob, ScanStatus
+from app.projects.models import Project
 from app.schemas.scan import ScanCreate, ScanResponse
 import time
 

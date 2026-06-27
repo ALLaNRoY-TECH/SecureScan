@@ -14,6 +14,7 @@ from app.shared.config import settings
 from app.shared.base_models import Base
 # Import all models here so Alembic can discover them
 from app.models import models
+from app.projects import models as projects_models
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
